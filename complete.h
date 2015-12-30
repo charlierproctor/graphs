@@ -1,4 +1,5 @@
 #include <vector>
+#include <string>
 #include "graph.h"
 
 #ifndef COMPLETE_H
@@ -12,7 +13,7 @@ public:
 	 * 
 	 * @param size number of vertices
 	 */
-	CompleteGraph (int size);
+	CompleteGraph (int size, std::string _name = "complete");
 	
 	/**
 	 * @brief destroy a CompleteGraph

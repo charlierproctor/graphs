@@ -1,9 +1,10 @@
 #include <iostream>
+#include <string>
 #include "complete.h"
 
 using namespace std;
 
-CompleteGraph::CompleteGraph(int size) {
+CompleteGraph::CompleteGraph(int size, string _name) : Graph(_name) {
 	
 	// create the vertices
 	for (int i = 0; i < size; ++i) {

@@ -1,4 +1,5 @@
 #include <vector>
+#include <string>
 #include "node.h"
 
 #ifndef GRAPH_H
@@ -10,13 +11,18 @@ public:
 	/**
 	 * @brief construct a Graph object
 	 */
-	Graph ();
+	Graph (std::string _name = "graph");
 	
 	/**
 	 * @brief destroy a Graph object
 	 */
 	~Graph ();
 	
+	/**
+	 * @brief name of the Graph
+	 */
+	std::string name;
+
 	/**
 	 * @brief the vertices of this graph
 	 */

@@ -3,8 +3,8 @@
 
 using namespace std;
 
-Graph::Graph(){
-
+Graph::Graph(string _name){
+	name = _name;
 }
 
 Graph::~Graph(){
@@ -35,7 +35,7 @@ int Graph::numEdges(){
 
 void Graph::dot(){
 	
-	cout << "digraph {" << endl;
+	cout << "digraph " << name << " { " << endl;
 
 	// iterate through all the vertices
 	for (Node *from : vertices) { 
