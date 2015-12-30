@@ -1,6 +1,9 @@
 #include <vector>
 #include "node.h"
 
+#ifndef GRAPH_H
+#define GRAPH_H
+
 class Graph
 {
 public:
@@ -36,3 +39,6 @@ public:
 	int numVertices();
 private:
 };
+
+#endif
+

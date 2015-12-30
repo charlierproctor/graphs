@@ -1,5 +1,6 @@
 #include <iostream>
 #include "graph.h"
+#include "complete.h"
 
 using namespace std;
 
@@ -11,6 +12,8 @@ int main(int argc, char *argv[])
 
 	a->pushNode(b);
 	b->pushNode(a);
-	
+
+	CompleteGraph *cg = new CompleteGraph(5);
+		
 	return 0;
 }
