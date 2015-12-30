@@ -7,6 +7,10 @@ Graph::Graph(){
 
 }
 
+Graph::~Graph(){
+
+}
+
 Node *Graph::createVertex(int label){
 	Node *elem = new Node(label);
 	vertices.push_back(elem);
@@ -16,3 +20,4 @@ Node *Graph::createVertex(int label){
 int Graph::numVertices(){
 	return vertices.size();
 }
+
