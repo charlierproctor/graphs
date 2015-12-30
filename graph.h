@@ -44,6 +44,11 @@ public:
 	 * @return number of edges in this graph
 	 */
 	int numEdges();
+
+	/**
+	 * @brief print the graph for visualization using `dot`.
+	 */
+	void dot();
 private:
 };
 

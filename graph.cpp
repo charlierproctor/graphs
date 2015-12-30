@@ -32,3 +32,18 @@ int Graph::numEdges(){
 
 	return num;
 }
+
+void Graph::dot(){
+	
+	cout << "digraph {" << endl;
+
+	// iterate through all the vertices
+	for (Node *from : vertices) { 
+		for (Node *to : from->adj_nodes){
+			cout << "\"" << from->label << "\" -> \"" << to->label << "\";" << endl;
+		}
+	}
+
+	cout << "}" << endl;
+	
+}
