@@ -37,6 +37,13 @@ public:
 	 * @return number of vertices in this graph
 	 */
 	int numVertices();
+
+	/**
+	 * @brief calculate the number of edges
+	 *
+	 * @return number of edges in this graph
+	 */
+	int numEdges();
 private:
 };
 

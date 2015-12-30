@@ -21,3 +21,14 @@ int Graph::numVertices(){
 	return vertices.size();
 }
 
+int Graph::numEdges(){
+	int num = 0;
+	
+	// iterate through all the vertices
+	for (Node *elem : vertices) {
+		// summing the number of adjacent nodes
+		num += elem->adj_nodes.size();
+	}
+
+	return num;
+}
