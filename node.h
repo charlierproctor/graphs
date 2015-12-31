@@ -11,7 +11,7 @@ public:
 	 *
 	 * @param label an integer label for this node
 	 */
-	Node (int label = -1);
+	Node (int label);
 	
 	/**
 	 * @brief Destroy a Node object
@@ -19,7 +19,7 @@ public:
 	~Node ();
 
 	/**
-	 * @brief the label for this node
+	 * @brief the label for this node; must be unique
 	 */
 	int label;
 	

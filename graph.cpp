@@ -11,8 +11,8 @@ Graph::~Graph(){
 
 }
 
-Node *Graph::createVertex(int label){
-	Node *elem = new Node(label);
+Node *Graph::createVertex(){
+	Node *elem = new Node(numVertices());
 	vertices.push_back(elem);
 	return elem;
 }

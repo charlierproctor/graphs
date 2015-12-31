@@ -31,11 +31,9 @@ public:
 	/**
 	 * @brief create a new vertex
 	 *
-	 * @param label number to labell this node with
-	 *
 	 * @return the created node
 	 */
-	Node *createVertex(int label = -1);
+	Node *createVertex();
 	
 	/**
 	 * @brief calculate the number of vertices
