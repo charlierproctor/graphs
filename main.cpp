@@ -11,8 +11,7 @@ int main(int argc, char *argv[])
 	Node *a = g->createVertex();
 	Node *b = g->createVertex();
 
-	a->connect(b, DIRECTED);
-	b->connect(a, DIRECTED);
+	g->createEdge(a,b,DIRECTED);
 
 	cout << "Graph: numVertices " << g->numVertices() << ", numEdges " << g->numEdges() << endl;
 	g->dot();

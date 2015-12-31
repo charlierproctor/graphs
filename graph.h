@@ -7,6 +7,7 @@
 #define GRAPH_H
 
 #include "types.h"
+#include "edge.h"
 #include "node.h"
 
 class Graph
@@ -36,6 +37,11 @@ public:
 	 * @brief the vertices of this graph
 	 */
 	std::vector<Node *> vertices;
+
+	/**
+	 * @brief the edges of this graph
+	 */
+	std::set<Edge *> edges;
 	
 	/**
 	 * @brief create a new vertex
@@ -44,6 +50,17 @@ public:
 	 */
 	Node *createVertex();
 	
+	/**
+	 * @brief create a new edge
+	 *
+	 * @param from the starting vertex
+	 * @param to the ending vertex
+	 * @param type the type of the connection (UNDIRECTED or DIRECTED)
+	 *
+	 * @return the new edge we created.
+	 */
+	Edge *createEdge(Node *from, Node *to, graph_t type = UNDIRECTED);
+
 	/**
 	 * @brief calculate the number of vertices
 	 *

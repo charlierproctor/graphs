@@ -12,8 +12,8 @@ CompleteGraph::CompleteGraph(int size, string _name, graph_t _type) : Graph(_nam
 	// connect each vertex to every other vertex
 	for (Node *from : vertices) {
 		for (Node *to : vertices) {
-			if (from != to) {
-				from->connect(to, DIRECTED);
+			if (type == UNDIRECTED ? to->label > from->label : from->label != to->label) {
+				createEdge(from, to, type);
 			}
 		}
 	}

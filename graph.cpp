@@ -17,21 +17,30 @@ Node *Graph::createVertex(){
 	return elem;
 }
 
+Edge *Graph::createEdge(Node *from, Node *to, graph_t type){
+	Edge *edge = new Edge();
+	
+	// set the attributes
+	edge->to = to;
+	edge->from = from;
+	edge->type = type;
+
+	// add this edge to our set
+	edges.insert(edge);
+
+	// and connect the two with pointers.
+	from->connect(to, type);
+
+	return edge;
+
+}
+
 int Graph::numVertices(){
 	return vertices.size();
 }
 
 int Graph::numEdges(){
-	int num = 0;
-	
-	// iterate through all the vertices
-	for (Node *elem : vertices) {
-		// summing the number of adjacent nodes
-		num += elem->adj_nodes.size();
-	}
-
-	// divide by two if undirected
-	return (type == UNDIRECTED ? num / 2 : num);
+	return edges.size();
 }
 
 void Graph::dot(){
@@ -44,11 +53,9 @@ void Graph::dot(){
 
 	string connector = (type == UNDIRECTED ? "--" : "->");
 
-	// iterate through all the vertices
-	for (Node *from : vertices) { 
-		for (Node *to : from->adj_nodes){
-			cout << "\"" << from->label << "\" " << connector << " \"" << to->label << "\";" << endl;
-		}
+	// iterate through all the edges
+	for (Edge *edge : edges) {
+		cout << "\"" << edge->from->label << "\" " << connector << " \"" << edge->to->label << "\";" << endl;
 	}
 
 	cout << "}" << endl;
