@@ -7,12 +7,12 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	// create and test a GRAPH
-	Graph *g = new Graph();
+	Graph *g = new Graph("first", DIRECTED);
 	Node *a = g->createVertex();
 	Node *b = g->createVertex();
 
-	a->pushNode(b);
-	b->pushNode(a);
+	a->connect(b, DIRECTED);
+	b->connect(a, DIRECTED);
 
 	cout << "Graph: numVertices " << g->numVertices() << ", numEdges " << g->numEdges() << endl;
 	g->dot();

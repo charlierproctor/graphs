@@ -1,10 +1,10 @@
-#include <iostream>
 #include "graph.h"
 
 using namespace std;
 
-Graph::Graph(string _name){
+Graph::Graph(string _name, graph_t _type){
 	name = _name;
+	type = _type;
 }
 
 Graph::~Graph(){
@@ -30,17 +30,24 @@ int Graph::numEdges(){
 		num += elem->adj_nodes.size();
 	}
 
-	return num;
+	// divide by two if undirected
+	return (type == UNDIRECTED ? num / 2 : num);
 }
 
 void Graph::dot(){
-	
-	cout << "digraph " << name << " { " << endl;
+
+	if (type == UNDIRECTED) {
+		cout << "graph " << name << " { " << endl;
+	} else {
+		cout << "digraph " << name << " { " << endl;
+	}
+
+	string connector = (type == UNDIRECTED ? "--" : "->");
 
 	// iterate through all the vertices
 	for (Node *from : vertices) { 
 		for (Node *to : from->adj_nodes){
-			cout << "\"" << from->label << "\" -> \"" << to->label << "\";" << endl;
+			cout << "\"" << from->label << "\" " << connector << " \"" << to->label << "\";" << endl;
 		}
 	}
 

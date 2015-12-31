@@ -1,9 +1,11 @@
 #include <vector>
 #include <string>
-#include "graph.h"
+#include <iostream>
 
 #ifndef COMPLETE_H
 #define COMPLETE_H
+
+#include "graph.h"
 
 class CompleteGraph: public Graph
 {
@@ -13,7 +15,7 @@ public:
 	 * 
 	 * @param size number of vertices
 	 */
-	CompleteGraph (int size, std::string _name = "complete");
+	CompleteGraph (int size, std::string _name = "complete", graph_t _type = UNDIRECTED);
 	
 	/**
 	 * @brief destroy a CompleteGraph

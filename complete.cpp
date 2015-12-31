@@ -1,10 +1,8 @@
-#include <iostream>
-#include <string>
 #include "complete.h"
 
 using namespace std;
 
-CompleteGraph::CompleteGraph(int size, string _name) : Graph(_name) {
+CompleteGraph::CompleteGraph(int size, string _name, graph_t _type) : Graph(_name,_type) {
 	
 	// create the vertices
 	for (int i = 0; i < size; ++i) {
@@ -15,7 +13,7 @@ CompleteGraph::CompleteGraph(int size, string _name) : Graph(_name) {
 	for (Node *from : vertices) {
 		for (Node *to : vertices) {
 			if (from != to) {
-				from->pushNode(to);
+				from->connect(to, DIRECTED);
 			}
 		}
 	}

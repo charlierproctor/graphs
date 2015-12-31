@@ -1,9 +1,13 @@
 #include <vector>
 #include <string>
-#include "node.h"
+#include <iostream>
+#include <set>
 
 #ifndef GRAPH_H
 #define GRAPH_H
+
+#include "types.h"
+#include "node.h"
 
 class Graph
 {
@@ -11,7 +15,7 @@ public:
 	/**
 	 * @brief construct a Graph object
 	 */
-	Graph (std::string _name = "graph");
+	Graph (std::string _name = "graph", graph_t _type = UNDIRECTED);
 	
 	/**
 	 * @brief destroy a Graph object
@@ -22,6 +26,11 @@ public:
 	 * @brief name of the Graph
 	 */
 	std::string name;
+
+	/**
+	 * @brief type of the Graph (UNDIRECTED or DIRECTED)
+	 */
+	graph_t type;
 
 	/**
 	 * @brief the vertices of this graph

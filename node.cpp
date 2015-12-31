@@ -1,4 +1,3 @@
-#include <vector>
 #include "node.h"
 
 using namespace std;
@@ -10,6 +9,9 @@ Node::Node(int _label){
 Node::~Node(){
 }
 
-void Node::pushNode(Node* elem){
+void Node::connect(Node* elem, graph_t type){
 	adj_nodes.push_back(elem);
+	if (type == UNDIRECTED){
+		elem->connect(this, DIRECTED);
+	}
 }

@@ -3,6 +3,8 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include "types.h"
+
 class Node
 {
 public:
@@ -28,7 +30,7 @@ public:
 	 *
 	 * @param elem the node to push
 	 */
-	void pushNode(Node* elem);
+	void connect(Node* elem, graph_t type = UNDIRECTED);
 
 	/**
 	 * @brief vector of adjacent nodes
