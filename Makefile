@@ -1,6 +1,6 @@
 # specify compiler and flags
 CXX = g++
-CXXFLAGS = -ggdb3 -std=c++11 -Wall
+CXXFLAGS = -ggdb3 -std=c++11 -Wall -MMD 
 
 # define the directories
 BUILD_DIR = build
@@ -27,4 +27,6 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
 clean:
 	$(RM) -r $(BUILD_DIR) $(TARGET)
 
+# include generated dependences (build/*.d)
+-include $(OBJS:%.o=%.d)
 
