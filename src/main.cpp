@@ -29,10 +29,10 @@ int main(int argc, char *argv[])
 			case 't':	// graph type (directed, undirected)
 				type = (!strcmp(optarg,"directed") ? DIRECTED : UNDIRECTED);
 				break;
-			case 'd':
+			case 'd':	// print dot representation
 				dot = true;
 				break;
-			case '?':
+			case '?':	// error parsing arg
 				exit(EXIT_FAILURE);
 				break;
 		} 	
@@ -67,6 +67,8 @@ int main(int argc, char *argv[])
 		if (dot) {
 			pg->dot();
 		}
+	
+	// invalid graph type
 	} else {
 		cerr << graph << ": invalid graph type" << endl;
 		exit(EXIT_FAILURE);
