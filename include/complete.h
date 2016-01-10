@@ -1,4 +1,3 @@
-#include <string>
 #include "graph.h"
 
 #ifndef COMPLETE_H

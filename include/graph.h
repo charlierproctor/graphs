@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <set>
+#include <iterator>
 
 #ifndef GRAPH_H
 #define GRAPH_H
