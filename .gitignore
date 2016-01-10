@@ -1,5 +1,5 @@
-*.o
-graph
+bin/*
+build
 
 *.swp
 

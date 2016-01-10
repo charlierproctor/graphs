@@ -1,10 +1,30 @@
+# specify compiler and flags
 CXX = g++
 CXXFLAGS = -ggdb3 -std=c++11 -Wall
 
-graph: main.o node.o graph.o complete.o 
-	     $(CXX) $(CXXFLAGS) -o $@ $^
+# define the directories
+BUILD_DIR = build
+SRC_DIR = src
+INC_DIR = include
 
-node.o: node.h graph.h edge.h types.h
-graph.o: node.h graph.h edge.h types.h
-complete.o: graph.h complete.h
-main.o: graph.h complete.h
+# our target executable
+TARGET = bin/graph
+
+# calculate SRCS and OBJS
+SRCS = $(shell find $(SRC_DIR) -type f -name *.cpp)
+OBJS = $(patsubst $(SRC_DIR)/%,$(BUILD_DIR)/%,$(SRCS:.cpp=.o))
+
+# create the target from the objects
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) $^ -o $(TARGET)
+
+# create the objects from the source files
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -I $(INC_DIR) -c -o $@ $<
+
+# clean: remove the build/* and target.
+clean:
+	$(RM) -r $(BUILD_DIR) $(TARGET)
+
+

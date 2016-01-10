@@ -6,9 +6,57 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include "types.h"
-#include "edge.h"
-#include "node.h"
+/**
+ * @brief enum type used in graphs / nodes.
+ */
+enum graph_t { 
+	DIRECTED,
+	UNDIRECTED
+};
+
+class Node
+{
+public:
+	/**
+	 * @brief Construct a Node object
+	 *
+	 * @param label an integer label for this node
+	 */
+	Node (int label);
+	
+	/**
+	 * @brief Destroy a Node object
+	 */
+	~Node ();
+
+	/**
+	 * @brief the label for this node; must be unique
+	 */
+	int label;
+	
+	/**
+	 * @brief push an adjacent node
+	 *
+	 * @param elem the node to push
+	 */
+	void connect(Node* elem, graph_t type = UNDIRECTED);
+
+	/**
+	 * @brief vector of adjacent nodes
+	 */
+	std::vector<Node *> adj_nodes;
+private:
+};
+
+/**
+ * @brief an edge connects two nodes.
+ */
+struct Edge {
+	Node *from;	// ending node
+	Node *to;	// starting node
+	graph_t type; 	// type of the connection
+};
+
 
 class Graph
 {
@@ -81,6 +129,25 @@ public:
 	void dot();
 private:
 };
+
+class CompleteGraph: public Graph
+{
+public:
+	/**
+	 * @brief construct a CompleteGraph
+	 * 
+	 * @param size number of vertices
+	 */
+	CompleteGraph (int size, std::string _name = "complete", graph_t _type = UNDIRECTED);
+	
+	/**
+	 * @brief destroy a CompleteGraph
+	 */
+	~CompleteGraph ();
+	
+private:
+};
+
 
 #endif
 
