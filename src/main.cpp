@@ -67,6 +67,9 @@ int main(int argc, char *argv[])
 		if (dot) {
 			pg->dot();
 		}
+	} else {
+		cerr << graph << ": invalid graph type" << endl;
+		exit(EXIT_FAILURE);
 	}
 
 	return 0;
