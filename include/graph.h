@@ -1,4 +1,3 @@
-#include <vector>
 #include <string>
 #include <iostream>
 #include <set>
@@ -42,9 +41,9 @@ public:
 	void connect(Node* elem, graph_t type = UNDIRECTED);
 
 	/**
-	 * @brief vector of adjacent nodes
+	 * @brief the set of adjacent nodes
 	 */
-	std::vector<Node *> adj_nodes;
+	std::set<Node *> adj_nodes;
 private:
 };
 
@@ -84,7 +83,7 @@ public:
 	/**
 	 * @brief the vertices of this graph
 	 */
-	std::vector<Node *> vertices;
+	std::set<Node *> vertices;
 
 	/**
 	 * @brief the edges of this graph

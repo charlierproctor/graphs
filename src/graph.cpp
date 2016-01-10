@@ -13,7 +13,7 @@ Graph::~Graph(){
 
 Node *Graph::createVertex(){
 	Node *elem = new Node(numVertices());
-	vertices.push_back(elem);
+	vertices.insert(elem);
 	return elem;
 }
 
