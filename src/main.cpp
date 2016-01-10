@@ -1,6 +1,7 @@
 #include "graph.h"
 #include "complete.h"
 #include "cycle.h"
+#include "path.h"
 
 using namespace std;
 
@@ -25,6 +26,11 @@ int main(int argc, char *argv[])
 	CycleGraph *cyg = new CycleGraph(5);
 	cout << "CycleGraph: numVertices " << cyg->numVertices() << ", numEdges " << cyg->numEdges() << endl;
 	cyg->dot();
+
+	// create and test a PATHGRAPH
+	PathGraph *pg = new PathGraph(5);
+	cout << "PathGraph: numVertices " << pg->numVertices() << ", numEdges " << pg->numEdges() << endl;
+	pg->dot();
 
 	return 0;
 }
