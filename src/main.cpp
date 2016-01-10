@@ -14,10 +14,11 @@ int main(int argc, char *argv[])
 	int num = 5; 
 	string graph = "complete"; 
 	graph_t type = UNDIRECTED;
-	
+	bool dot = false;
+
 	// parse the command-line arguments
 	int c;
-	while ((c = getopt(argc, argv, "g:n:t:")) != -1) {
+	while ((c = getopt(argc, argv, "g:n:t:d")) != -1) {
 		switch (c) {
 			case 'g':	// graph name
 				graph = string(optarg);
@@ -28,6 +29,9 @@ int main(int argc, char *argv[])
 			case 't':	// graph type (directed, undirected)
 				type = (!strcmp(optarg,"directed") ? DIRECTED : UNDIRECTED);
 				break;
+			case 'd':
+				dot = true;
+				break;
 			case '?':
 				exit(EXIT_FAILURE);
 				break;
@@ -37,20 +41,32 @@ int main(int argc, char *argv[])
 	// create and draw a COMPLETE GRAPH
 	if (graph == "complete") {
 		CompleteGraph *cg = new CompleteGraph(num, graph, type);
-		cout << "CompleteGraph: numVertices " << cg->numVertices() << ", numEdges " << cg->numEdges() << endl;
-		cg->dot();
+		
+		cerr << "CompleteGraph: numVertices " << cg->numVertices() << ", numEdges " << cg->numEdges() << endl;
+		
+		if (dot) {
+			cg->dot();
+		}
 
 	// create and draw a CYCLE GRAPH
 	} else if (graph == "cycle") {
 		CycleGraph *cyg = new CycleGraph(num, graph, type);
-		cout << "CycleGraph: numVertices " << cyg->numVertices() << ", numEdges " << cyg->numEdges() << endl;
-		cyg->dot();
+		
+		cerr << "CycleGraph: numVertices " << cyg->numVertices() << ", numEdges " << cyg->numEdges() << endl;
+		
+		if (dot) {
+			cyg->dot();
+		}
 
 	// create and draw a PATH GRAPH
 	} else if (graph == "path") {
 		PathGraph *pg = new PathGraph(num, graph, type);
-		cout << "PathGraph: numVertices " << pg->numVertices() << ", numEdges " << pg->numEdges() << endl;
-		pg->dot();
+		
+		cerr << "PathGraph: numVertices " << pg->numVertices() << ", numEdges " << pg->numEdges() << endl;
+		
+		if (dot) {
+			pg->dot();
+		}
 	}
 
 	return 0;
