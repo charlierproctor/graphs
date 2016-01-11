@@ -10,9 +10,9 @@ PathGraph::PathGraph(int size, string _name, graph_t _type) : Graph(_name,_type)
 	}
 
 	// connect each vertex to the next vertex
-	for (std::set<Node *>::iterator it = vertices.begin(); it != vertices.end(); ++it) {
+	for (std::map<int,Node *>::iterator it = vertices.begin(); it != vertices.end(); ++it) {
 		if (next(it) != vertices.end()) {
-			createEdge(*it, *(next(it)),type);
+			createEdge((*it).second, (*(next(it))).second,type);
 		}
 	}
 

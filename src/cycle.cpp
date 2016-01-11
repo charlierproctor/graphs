@@ -10,8 +10,8 @@ CycleGraph::CycleGraph(int size, string _name, graph_t _type) : Graph(_name,_typ
 	}
 
 	// connect each vertex to the next vertex
-	for (std::set<Node *>::iterator it = vertices.begin(); it != vertices.end(); ++it) {
-		createEdge(*it,*(next(it) != vertices.end() ? next(it) : vertices.begin()),type);
+	for (std::map<int,Node *>::iterator it = vertices.begin(); it != vertices.end(); ++it) {
+		createEdge((*it).second,(*(next(it) != vertices.end() ? next(it) : vertices.begin())).second,type);
 	}
 
 }

@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <set>
+#include <map>
 #include <iterator>
 
 #ifndef GRAPH_H
@@ -42,9 +43,9 @@ public:
 	void connect(Node* elem, graph_t type = UNDIRECTED);
 
 	/**
-	 * @brief the set of adjacent nodes
+	 * @brief map of (labels -> Node *) of the adjacent nodes
 	 */
-	std::set<Node *> adj_nodes;
+	std::map<int,Node *> adj_nodes;
 private:
 };
 
@@ -84,7 +85,7 @@ public:
 	/**
 	 * @brief the vertices of this graph
 	 */
-	std::set<Node *> vertices;
+	std::map<int,Node *> vertices;
 
 	/**
 	 * @brief the edges of this graph
