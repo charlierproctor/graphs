@@ -1,4 +1,4 @@
-#include "cycle.h"
+#include "graph_types.h"
 
 using namespace std;
 

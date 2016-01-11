@@ -1,7 +1,5 @@
 #include "graph.h"
-#include "complete.h"
-#include "cycle.h"
-#include "path.h"
+#include "graph_types.h"
 #include "search.h"
 
 #include "string.h"

@@ -1,4 +1,4 @@
-#include "complete.h"
+#include "graph_types.h"
 
 using namespace std;
 
