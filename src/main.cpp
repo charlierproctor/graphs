@@ -101,12 +101,21 @@ int main(int argc, char *argv[])
 		} 	
 	}
 
-	// and perform the search
+	// process search option
 	if (search) {
+		// perform the search
+		Node *res;
 		if (st == BFS) {
-			cerr << "found: " << bfs(g->vertices[from],g->vertices[to])->label << " from: " << from << endl;
+			res = bfs(g->vertices[from],g->vertices[to]);
 		} else {
-			cerr << "found: " << dfs(g->vertices[from],g->vertices[to]) << " from: " << from << endl;
+			res = dfs(g->vertices[from],g->vertices[to]);
+		}
+
+		// print out the results of the search
+		if (res) {
+			cerr << "found: " << res->label << " from: " << from << endl;
+		} else {
+			cerr << "not found" << endl;
 		}
 	}
 
