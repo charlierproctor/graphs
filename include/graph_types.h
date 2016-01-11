@@ -73,9 +73,21 @@ public:
 private:
 };
 
-class Tree: public virtual Graph
+class Tree: public Graph
 {
 public:
+	/**
+	 * @brief construct a Tree
+	 *
+	 * @param _name name to give the tree
+	 */
+	Tree(std::string _name = "tree");
+
+	/**
+	 * @brief destory a Tree
+	 */
+	~Tree();
+
 	/**
 	 * @brief height of a tree
 	 */
