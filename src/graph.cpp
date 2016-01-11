@@ -12,7 +12,7 @@ Graph::~Graph(){
 }
 
 Node *Graph::createVertex(){
-	int label = numVertices();
+	int label = vertices.size();
 	Node *elem = new Node(label);
 	vertices[label] = elem;
 	return elem;
@@ -34,14 +34,6 @@ Edge *Graph::createEdge(Node *from, Node *to, graph_t type){
 
 	return edge;
 
-}
-
-int Graph::numVertices(){
-	return vertices.size();
-}
-
-int Graph::numEdges(){
-	return edges.size();
 }
 
 void Graph::dot(){

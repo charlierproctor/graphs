@@ -21,8 +21,8 @@ Node *bfs(Node *start, Node *find) {
 		}
 		
 		// push all adjacent nodes onto the queue
-		for (auto adj : cursor->adj_nodes) {
-			q.push(adj.second);
+		for (Node *adj : cursor->adj_nodes) {
+			q.push(adj);
 		}
 	}
 
@@ -50,8 +50,8 @@ Node *dfs(Node *start, Node *find) {
 		}
 		
 		// push all adjacent nodes onto the queue
-		for (auto adj : cursor->adj_nodes) {
-			s.push(adj.second);
+		for (Node *adj : cursor->adj_nodes) {
+			s.push(adj);
 		}
 	}
 

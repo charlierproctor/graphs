@@ -10,7 +10,7 @@ Node::~Node(){
 }
 
 void Node::connect(Node* elem, graph_t type){
-	adj_nodes[elem->label] = elem;
+	adj_nodes.insert(elem);
 	if (type == UNDIRECTED){
 		elem->connect(this, DIRECTED);
 	}

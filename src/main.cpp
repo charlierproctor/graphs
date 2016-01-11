@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	cerr << "numVertices: " << g->numVertices() << ", numEdges: " << g->numEdges() << endl;
+	cerr << "numVertices: " << g->vertices.size() << ", numEdges: " << g->edges.size() << endl;
 
 
 	// print the graph, as appropriate

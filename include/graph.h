@@ -43,9 +43,9 @@ public:
 	void connect(Node* elem, graph_t type = UNDIRECTED);
 
 	/**
-	 * @brief map of (labels -> Node *) of the adjacent nodes
+	 * @brief set of the adjacent nodes
 	 */
-	std::map<int,Node *> adj_nodes;
+	std::set<Node *> adj_nodes;
 private:
 };
 
@@ -83,7 +83,7 @@ public:
 	graph_t type;
 
 	/**
-	 * @brief the vertices of this graph
+	 * @brief a map (label -> ptr) of the vertices of this graph
 	 */
 	std::map<int,Node *> vertices;
 
@@ -109,20 +109,6 @@ public:
 	 * @return the new edge we created.
 	 */
 	Edge *createEdge(Node *from, Node *to, graph_t type = UNDIRECTED);
-
-	/**
-	 * @brief calculate the number of vertices
-	 *
-	 * @return number of vertices in this graph
-	 */
-	int numVertices();
-
-	/**
-	 * @brief calculate the number of edges
-	 *
-	 * @return number of edges in this graph
-	 */
-	int numEdges();
 
 	/**
 	 * @brief print the graph for visualization using `dot`.
