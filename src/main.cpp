@@ -14,14 +14,17 @@ int main(int argc, char *argv[])
 	int num = 5, m = 5, children = 2; 
 	string graph = "complete"; 
 	graph_t type = UNDIRECTED;
-	bool dot = false;
-	bool search = false;
+	bool dot = false, search = false, read = false;
 
 	// parse the command-line arguments
 	int c;
-	while (!search && (c = getopt(argc, argv, "g:n:m:t:c:dS")) != -1) {
+	while (!search && (c = getopt(argc, argv, "g:r:n:m:t:c:dS")) != -1) {
 		switch (c) {
 			case 'g':	// graph name
+				graph = string(optarg);
+				break;
+			case 'r':	// read graph from stdin / file
+				read = true;
 				graph = string(optarg);
 				break;
 			case 'n':	// size of the graph
@@ -50,8 +53,21 @@ int main(int argc, char *argv[])
 
 	Graph *g;
 
+	// create the graph from a file
+	if (read) {
+		ifstream file;
+
+		if (graph == "+") {
+			g = new Graph(cin);
+		} else if (file.open(graph, ios::in), file.is_open()) {
+			g = new Graph(file);
+		} else {
+			cerr << "Unable to open " << graph << endl;
+			exit (EXIT_FAILURE);
+		}
+
 	// create a COMPLETE GRAPH
-	if (graph == "complete") {
+	} else if (graph == "complete") {
 		g = new CompleteGraph(num, graph, type);
 
 	// create a COMPLETE BIPARTITE GRAPH

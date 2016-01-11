@@ -5,6 +5,9 @@
 #include <map>
 #include <iterator>
 #include <stack>
+#include <iostream>
+#include <fstream>
+#include <regex>
 
 #ifndef GRAPH_H
 #define GRAPH_H
@@ -69,6 +72,14 @@ struct Edge {
 class Graph
 {
 public:
+	
+	/**
+	 * @brief construct a Graph object from a file (dot representation)
+	 *
+	 * @param str the stream to read
+	 */
+	Graph (std::istream &str);
+
 	/**
 	 * @brief construct a Graph object
 	 */
@@ -98,6 +109,15 @@ public:
 	 * @brief the edges of this graph
 	 */
 	std::set<Edge *> edges;
+
+	/**
+	 * @brief create a new vertex
+	 *
+	 * @param label label the vertex
+	 *
+	 * @return the created node
+	 */
+	Node *createVertex(int label);
 	
 	/**
 	 * @brief create a new vertex
