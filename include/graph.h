@@ -121,16 +121,6 @@ public:
 	 * @brief print the graph for visualization using `dot`.
 	 */
 	void dot();
-
-	/**
-	 * @brief height of a tree
-	 */
-	int height;
-
-	/**
-	 * @brief root of the tree
-	 */
-	Node *root;
 private:
 };
 

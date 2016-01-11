@@ -65,6 +65,7 @@ int main(int argc, char *argv[])
 	} else if (graph == "path") {
 		g = new PathGraph(num, graph, type);
 
+	// create a TREE
 	} else if (graph == "tree") {
 		g = new FullCompleteTree(graph, children, num);
 

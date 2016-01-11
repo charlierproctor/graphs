@@ -73,7 +73,21 @@ public:
 private:
 };
 
-class FullCompleteTree: public Graph
+class Tree: public virtual Graph
+{
+public:
+	/**
+	 * @brief height of a tree
+	 */
+	int height;
+
+	/**
+	 * @brief root of the tree
+	 */
+	Node *root;
+};
+
+class FullCompleteTree: public Tree
 {
 public:
 	/**
