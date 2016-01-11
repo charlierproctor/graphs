@@ -21,6 +21,22 @@ public:
 private:
 };
 
+class CompleteBipartiteGraph: public Graph
+{
+public:
+	/**
+	 * @brief construct a CompleteBipartiteGraph
+	 * 
+	 * @param size number of vertices
+	 */
+	CompleteBipartiteGraph (int n, int m, std::string _name = "bipartite", graph_t _type = UNDIRECTED);
+	
+	/**
+	 * @brief destroy a CompleteBipartiteGraph
+	 */
+	~CompleteBipartiteGraph ();
+};
+
 class CycleGraph: public Graph
 {
 public:

@@ -10,7 +10,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	// default arguments
-	int num = 5, children = 2; 
+	int num = 5, m = 5, children = 2; 
 	string graph = "complete"; 
 	graph_t type = UNDIRECTED;
 	bool dot = false;
@@ -18,13 +18,16 @@ int main(int argc, char *argv[])
 
 	// parse the command-line arguments
 	int c;
-	while (!search && (c = getopt(argc, argv, "g:n:t:c:dS")) != -1) {
+	while (!search && (c = getopt(argc, argv, "g:n:m:t:c:dS")) != -1) {
 		switch (c) {
 			case 'g':	// graph name
 				graph = string(optarg);
 				break;
 			case 'n':	// size of the graph
 				num = atoi(optarg);
+				break;
+			case 'm':
+				m = atoi(optarg);
 				break;
 			case 't':	// graph type (directed, undirected)
 				type = (!strcmp(optarg,"directed") ? DIRECTED : UNDIRECTED);
@@ -46,15 +49,19 @@ int main(int argc, char *argv[])
 
 	Graph *g;
 
-	// create and draw a COMPLETE GRAPH
+	// create a COMPLETE GRAPH
 	if (graph == "complete") {
 		g = new CompleteGraph(num, graph, type);
-		
-	// create and draw a CYCLE GRAPH
+
+	// create a COMPLETE BIPARTITE GRAPH
+	} else if (graph == "bipartite") {
+		g = new CompleteBipartiteGraph(num, m, graph, type);
+
+	// create a CYCLE GRAPH
 	} else if (graph == "cycle") {
 		g = new CycleGraph(num, graph, type);
 		
-	// create and draw a PATH GRAPH
+	// create a PATH GRAPH
 	} else if (graph == "path") {
 		g = new PathGraph(num, graph, type);
 
