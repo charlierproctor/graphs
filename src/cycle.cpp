@@ -1,4 +1,4 @@
-#include "graph_types.h"
+#include "graphs.h"
 
 using namespace std;
 

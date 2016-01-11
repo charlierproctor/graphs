@@ -1,4 +1,4 @@
-#include "graph_types.h"
+#include "trees.h"
 
 using namespace std;
 

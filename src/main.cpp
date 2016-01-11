@@ -1,5 +1,6 @@
 #include "graph.h"
-#include "graph_types.h"
+#include "graphs.h"
+#include "trees.h"
 #include "search.h"
 
 #include "string.h"
