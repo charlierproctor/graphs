@@ -10,7 +10,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	// default arguments
-	int num = 5; 
+	int num = 5, children = 2; 
 	string graph = "complete"; 
 	graph_t type = UNDIRECTED;
 	bool dot = false;
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 
 	// parse the command-line arguments
 	int c;
-	while (!search && (c = getopt(argc, argv, "g:n:t:dS")) != -1) {
+	while (!search && (c = getopt(argc, argv, "g:n:t:c:dS")) != -1) {
 		switch (c) {
 			case 'g':	// graph name
 				graph = string(optarg);
@@ -31,6 +31,9 @@ int main(int argc, char *argv[])
 				break;
 			case 'd':	// print dot representation
 				dot = true;
+				break;
+			case 'c':	// how many of the tree
+				children = atoi(optarg);
 				break;
 			case 'S':
 				search = true;
@@ -54,7 +57,10 @@ int main(int argc, char *argv[])
 	// create and draw a PATH GRAPH
 	} else if (graph == "path") {
 		g = new PathGraph(num, graph, type);
-		
+
+	} else if (graph == "tree") {
+		g = new FullCompleteTree(graph, children, num);
+
 	// invalid graph type
 	} else {
 		cerr << graph << ": invalid graph type" << endl;

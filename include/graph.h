@@ -3,6 +3,7 @@
 #include <set>
 #include <map>
 #include <iterator>
+#include <stack>
 
 #ifndef GRAPH_H
 #define GRAPH_H
@@ -34,6 +35,16 @@ public:
 	 * @brief the label for this node; must be unique
 	 */
 	int label;
+
+	/**
+	 * @brief height of the node, used in trees
+	 */
+	int height;
+	
+	/**
+	 * @brief depth of the node, used in trees
+	 */
+	int depth;
 	
 	/**
 	 * @brief push an adjacent node
@@ -114,6 +125,16 @@ public:
 	 * @brief print the graph for visualization using `dot`.
 	 */
 	void dot();
+
+	/**
+	 * @brief height of a tree
+	 */
+	int height;
+
+	/**
+	 * @brief root of the tree
+	 */
+	Node *root;
 private:
 };
 

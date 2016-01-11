@@ -57,5 +57,23 @@ public:
 private:
 };
 
+class FullCompleteTree: public Graph
+{
+public:
+	/**
+	 * @brief construct a FullCompleteTree
+	 *
+	 * @param _name name of the graph
+	 * @param children number of children per node
+	 * @param height height of the tree
+	 */
+	FullCompleteTree (std::string _name = "tree", int children = 2, int height = 2);
+	
+	/**
+	 * @brief destroy a FullCompleteTree
+	 */
+	~FullCompleteTree ();
+};
+
 #endif
 
