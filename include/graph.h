@@ -42,11 +42,6 @@ public:
 	int height;
 	
 	/**
-	 * @brief depth of the node, used in trees
-	 */
-	int depth;
-	
-	/**
 	 * @brief push an adjacent node
 	 *
 	 * @param elem the node to push
