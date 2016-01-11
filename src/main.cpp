@@ -49,19 +49,13 @@ int main(int argc, char *argv[])
 	if (graph == "complete") {
 		g = new CompleteGraph(num, graph, type);
 		
-		cerr << "CompleteGraph: ";		
-
 	// create and draw a CYCLE GRAPH
 	} else if (graph == "cycle") {
 		g = new CycleGraph(num, graph, type);
 		
-		cerr << "CycleGraph: ";
-		
 	// create and draw a PATH GRAPH
 	} else if (graph == "path") {
 		g = new PathGraph(num, graph, type);
-		
-		cerr << "PathGraph: ";
 		
 	// invalid graph type
 	} else {
@@ -69,7 +63,7 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	cerr << " numVertices " << g->numVertices() << ", numEdges " << g->numEdges() << endl;
+	cerr << "numVertices: " << g->numVertices() << ", numEdges: " << g->numEdges() << endl;
 
 
 	// print the graph, as appropriate
