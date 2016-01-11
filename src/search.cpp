@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Node *bfs(Node *start, int find) {
+Node *bfs(Node *start, Node *find) {
 	queue<Node *> q;
 	
 	// push on the first element
@@ -16,7 +16,7 @@ Node *bfs(Node *start, int find) {
 		q.pop();
 
 		/// we found the node we're looking for	
-		if (cursor->label == find) {
+		if (cursor == find) {
 			return cursor;
 		}
 		
@@ -31,7 +31,7 @@ Node *bfs(Node *start, int find) {
 
 }
 
-Node *dfs(Node *start, int find) {
+Node *dfs(Node *start, Node *find) {
 	stack<Node *> s;
 	
 	// push on the first element
@@ -45,7 +45,7 @@ Node *dfs(Node *start, int find) {
 		s.pop();
 
 		/// we found the node we're looking for	
-		if (cursor->label == find) {
+		if (cursor == find) {
 			return cursor;
 		}
 		

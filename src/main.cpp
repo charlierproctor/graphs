@@ -2,6 +2,7 @@
 #include "complete.h"
 #include "cycle.h"
 #include "path.h"
+#include "search.h"
 
 #include "string.h"
 #include "unistd.h"
@@ -15,10 +16,11 @@ int main(int argc, char *argv[])
 	string graph = "complete"; 
 	graph_t type = UNDIRECTED;
 	bool dot = false;
+	bool search = false;
 
 	// parse the command-line arguments
 	int c;
-	while ((c = getopt(argc, argv, "g:n:t:d")) != -1) {
+	while (!search && (c = getopt(argc, argv, "g:n:t:dS")) != -1) {
 		switch (c) {
 			case 'g':	// graph name
 				graph = string(optarg);
@@ -32,46 +34,80 @@ int main(int argc, char *argv[])
 			case 'd':	// print dot representation
 				dot = true;
 				break;
+			case 'S':
+				search = true;
+				break;
 			case '?':	// error parsing arg
 				exit(EXIT_FAILURE);
 				break;
 		} 	
 	}
 
+	Graph *g;
+
 	// create and draw a COMPLETE GRAPH
 	if (graph == "complete") {
-		CompleteGraph *cg = new CompleteGraph(num, graph, type);
+		g = new CompleteGraph(num, graph, type);
 		
-		cerr << "CompleteGraph: numVertices " << cg->numVertices() << ", numEdges " << cg->numEdges() << endl;
-		
-		if (dot) {
-			cg->dot();
-		}
+		cerr << "CompleteGraph: ";		
 
 	// create and draw a CYCLE GRAPH
 	} else if (graph == "cycle") {
-		CycleGraph *cyg = new CycleGraph(num, graph, type);
+		g = new CycleGraph(num, graph, type);
 		
-		cerr << "CycleGraph: numVertices " << cyg->numVertices() << ", numEdges " << cyg->numEdges() << endl;
+		cerr << "CycleGraph: ";
 		
-		if (dot) {
-			cyg->dot();
-		}
-
 	// create and draw a PATH GRAPH
 	} else if (graph == "path") {
-		PathGraph *pg = new PathGraph(num, graph, type);
+		g = new PathGraph(num, graph, type);
 		
-		cerr << "PathGraph: numVertices " << pg->numVertices() << ", numEdges " << pg->numEdges() << endl;
+		cerr << "PathGraph: ";
 		
-		if (dot) {
-			pg->dot();
-		}
-	
 	// invalid graph type
 	} else {
 		cerr << graph << ": invalid graph type" << endl;
 		exit(EXIT_FAILURE);
+	}
+
+	cerr << " numVertices " << g->numVertices() << ", numEdges " << g->numEdges() << endl;
+
+
+	// print the graph, as appropriate
+	if (dot) {
+		g->dot();
+	}
+
+	int from = 0, to = 0;
+	search_t st = BFS;
+
+	// parse the search arguments
+	while (search && (c = getopt(argc, argv, "f:t:bd")) != -1) {
+		switch (c) {
+			case 'f':	// from this vertex
+				from = atoi(optarg);
+				break;
+			case 't':	// to this vertex
+				to = atoi(optarg);
+				break;
+			case 'b':	// breadth-first
+				st = BFS;
+				break;
+			case 'd':	// depth-first
+				st = DFS;
+				break;
+			case '?':	// error parsing arg
+				exit(EXIT_FAILURE);
+				break;
+		} 	
+	}
+
+	// and perform the search
+	if (search) {
+		if (st == BFS) {
+			cerr << "found: " << bfs(g->vertices[from],g->vertices[to])->label << " from: " << from << endl;
+		} else {
+			cerr << "found: " << dfs(g->vertices[from],g->vertices[to]) << " from: " << from << endl;
+		}
 	}
 
 	return 0;
