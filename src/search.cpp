@@ -1,8 +1,8 @@
-#include "search.h"
+#include "graph.h"
 
 using namespace std;
 
-Node *bfs(Node *start, Node *find) {
+Node *Graph::bfs(Node *start, Node *find) {
 	queue<Node *> q;
 	
 	// push on the first element
@@ -31,7 +31,7 @@ Node *bfs(Node *start, Node *find) {
 
 }
 
-Node *dfs(Node *start, Node *find) {
+Node *Graph::dfs(Node *start, Node *find) {
 	stack<Node *> s;
 	
 	// push on the first element

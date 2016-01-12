@@ -1,7 +1,6 @@
 #include "graph.h"
 #include "graphs.h"
 #include "trees.h"
-#include "search.h"
 
 #include "string.h"
 #include "unistd.h"
@@ -129,9 +128,9 @@ int main(int argc, char *argv[])
 		// perform the search
 		Node *res;
 		if (st == BFS) {
-			res = bfs(g->vertices[from],g->vertices[to]);
+			res = g->bfs(g->vertices[from],g->vertices[to]);
 		} else {
-			res = dfs(g->vertices[from],g->vertices[to]);
+			res = g->dfs(g->vertices[from],g->vertices[to]);
 		}
 
 		// print out the results of the search

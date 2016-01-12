@@ -8,6 +8,8 @@
 #include <iostream>
 #include <fstream>
 #include <regex>
+#include <stack>
+#include <queue>
 
 #ifndef GRAPH_H
 #define GRAPH_H
@@ -51,6 +53,11 @@ public:
 	 * @brief set of the adjacent nodes
 	 */
 	std::set<Node *> adj_nodes;
+
+	/**
+	 * @brief whether we've visited this node, used during search.
+	 */
+	bool visited;
 };
 
 /**
@@ -62,6 +69,11 @@ struct Edge {
 	graph_t type; 	// type of the connection
 };
 
+// the two types of searches
+enum search_t {
+	BFS,	// breadth-first search
+	DFS	// depth-first search
+};
 
 class Graph
 {
@@ -135,6 +147,33 @@ public:
 	 * @brief print the graph for visualization using `dot`.
 	 */
 	void dot();
+
+	/**
+	 * @brief perform breadth-first search through a graph
+	 *
+	 * @param start which node to start at
+	 * @param find the node we're attempting to find
+	 *
+	 * @return the node we found 
+	 */
+	Node *bfs(Node *start, Node *find);
+
+	/**
+	 * @brief perform depth-first search through a graph
+	 *
+	 * @param start which node to start at
+	 * @param find the node we're attempting to find
+	 *
+	 * @return the node we found
+	 */
+	Node *dfs(Node *start, Node *find);
+	
+	/**
+	* @brief whether or not the graph is connected
+	 *
+	 * @return boolean; whether the graph is connected
+	 */
+	bool isConnected();
 private:
 };
 
