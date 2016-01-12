@@ -5,6 +5,7 @@ using namespace std;
 Node::Node(int _label){
 	label = _label;
 	visited = false;
+	height = 0, depth = 0;
 }
 
 void Node::connect(Node* elem, graph_t type){

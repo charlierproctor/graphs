@@ -41,6 +41,11 @@ public:
 	 * @brief height of the node, used in trees
 	 */
 	int height;
+
+	/**
+	 * @brief depth of the node, used in Graph::hasCycle()
+	 */
+	int depth;
 	
 	/**
 	 * @brief push an adjacent node
@@ -174,7 +179,13 @@ public:
 	 * @return boolean; whether the graph is connected
 	 */
 	bool isConnected();
-private:
+
+	/**
+	 * @brief whether or not the graph is connected
+	 *
+	 * @return boolean; whether the graph is connected
+	 */
+	bool hasCycle();
 };
 
 #endif

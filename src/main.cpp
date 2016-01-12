@@ -101,6 +101,8 @@ int main(int argc, char *argv[])
 		cerr << property << ": ";
 		if (property == "connected") {
 			cerr << boolalpha << g->isConnected() << endl;
+		} else if (property == "cycle") {
+			cerr << boolalpha << g->hasCycle() << endl;
 		} else {
 			cerr << "invalid" << endl;
 		}
