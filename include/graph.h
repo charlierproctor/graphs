@@ -186,6 +186,19 @@ public:
 	 * @return boolean; whether the graph is connected
 	 */
 	bool hasCycle();
+
+	/**
+	 * @brief is this graph a tree?
+	 *
+	 * @return boolean: whether the graph is a tree
+	 */
+	bool isTree();
+
+protected:
+	/**
+	 * @brief reset visited to false on all nodes.
+	 */
+	void resetVisited();
 };
 
 #endif

@@ -103,6 +103,8 @@ int main(int argc, char *argv[])
 			cerr << boolalpha << g->isConnected() << endl;
 		} else if (property == "cycle") {
 			cerr << boolalpha << g->hasCycle() << endl;
+		} else if (property == "tree") {
+			cerr << boolalpha << g->isTree() << endl;
 		} else {
 			cerr << "invalid" << endl;
 		}

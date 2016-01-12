@@ -2,6 +2,12 @@
 
 using namespace std;
 
+void Graph::resetVisited(){
+	for (auto elem : vertices) {
+		elem.second->visited = false;
+	}
+}
+
 bool Graph::isConnected(){
 
 	// a graph without vertices is connected
@@ -35,10 +41,12 @@ bool Graph::isConnected(){
 	// check to see that all the nodes were visited
 	for (auto elem : vertices) {
 		if (!elem.second->visited) {
+			resetVisited();
 			return false;
 		}
 	}
 
+	resetVisited();
 	return true;
 }
 
@@ -71,6 +79,7 @@ bool Graph::hasCycle(){
 		for (Node *adj : cursor->adj_nodes) {
 			
 			if (adj->visited && adj->depth < cursor->depth){
+				resetVisited();
 				return true;
 			}
 
@@ -78,5 +87,11 @@ bool Graph::hasCycle(){
 			s.push(adj);
 		}
 	}
+	resetVisited();
 	return false;
+}
+
+bool Graph::isTree(){
+	return ((vertices.size() == edges.size() + 1)
+			&& isConnected() && !hasCycle());
 }
