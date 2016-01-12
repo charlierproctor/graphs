@@ -18,6 +18,3 @@ PathGraph::PathGraph(int size, string _name, graph_t _type) : Graph(_name,_type)
 
 }
 
-PathGraph::~PathGraph(){
-
-}

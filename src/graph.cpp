@@ -39,7 +39,15 @@ Graph::Graph(string _name, graph_t _type){
 }
 
 Graph::~Graph(){
+	// free the vertices
+	for (auto elem : vertices) {
+		delete elem.second;
+	}
 
+	// free the edges
+	for (Edge *edge : edges) {
+		delete edge;
+	}
 }
 
 Node *Graph::createVertex(int label){

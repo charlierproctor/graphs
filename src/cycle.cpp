@@ -16,6 +16,3 @@ CycleGraph::CycleGraph(int size, string _name, graph_t _type) : Graph(_name,_typ
 
 }
 
-CycleGraph::~CycleGraph(){
-
-}

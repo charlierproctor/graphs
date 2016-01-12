@@ -28,6 +28,3 @@ CompleteBipartiteGraph::CompleteBipartiteGraph(int n, int m, string _name, graph
 
 }
 
-CompleteBipartiteGraph::~CompleteBipartiteGraph(){
-
-}

@@ -20,6 +20,3 @@ CompleteGraph::CompleteGraph(int size, string _name, graph_t _type) : Graph(_nam
 
 }
 
-CompleteGraph::~CompleteGraph(){
-
-}

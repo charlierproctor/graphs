@@ -29,11 +29,6 @@ public:
 	 * @param label an integer label for this node
 	 */
 	Node (int label);
-	
-	/**
-	 * @brief Destroy a Node object
-	 */
-	~Node ();
 
 	/**
 	 * @brief the label for this node; must be unique
@@ -56,7 +51,6 @@ public:
 	 * @brief set of the adjacent nodes
 	 */
 	std::set<Node *> adj_nodes;
-private:
 };
 
 /**

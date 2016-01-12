@@ -5,9 +5,6 @@ using namespace std;
 Tree::Tree(string _name):Graph(_name,DIRECTED) {
 }
 
-Tree::~Tree() {
-}
-
 FullCompleteTree::FullCompleteTree(string _name, int children, int height):Tree(_name) {
 
 	// set the height of the tree
@@ -43,5 +40,3 @@ FullCompleteTree::FullCompleteTree(string _name, int children, int height):Tree(
 
 }
 
-FullCompleteTree::~FullCompleteTree(){
-}

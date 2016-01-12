@@ -14,11 +14,6 @@ public:
 	Tree(std::string _name = "tree");
 
 	/**
-	 * @brief destory a Tree
-	 */
-	~Tree();
-
-	/**
 	 * @brief height of a tree
 	 */
 	int height;
@@ -40,11 +35,6 @@ public:
 	 * @param height height of the tree
 	 */
 	FullCompleteTree (std::string _name = "tree", int children = 2, int height = 2);
-	
-	/**
-	 * @brief destroy a FullCompleteTree
-	 */
-	~FullCompleteTree ();
 };
 
 #endif

@@ -142,5 +142,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
+	delete g;
+
 	return 0;
 }
