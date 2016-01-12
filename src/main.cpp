@@ -15,10 +15,11 @@ int main(int argc, char *argv[])
 	graph_t type = UNDIRECTED;
 	vector<string> properties;
 	bool dot = false, search = false, read = false;
+	search_t st;
 
 	// parse the command-line arguments
 	int c;
-	while (!search && (c = getopt(argc, argv, "g:r:n:m:t:c:p:dS")) != -1) {
+	while (!search && (c = getopt(argc, argv, "g:r:n:m:t:c:p:S:d")) != -1) {
 		switch (c) {
 			case 'g':	// graph name
 				graph = string(optarg);
@@ -47,6 +48,7 @@ int main(int argc, char *argv[])
 				break;
 			case 'S':
 				search = true;
+				st = (!strcmp(optarg, "depth") ? DFS : BFS);
 				break;
 			case '?':	// error parsing arg
 				exit(EXIT_FAILURE);
@@ -119,22 +121,15 @@ int main(int argc, char *argv[])
 	}
 
 	int from = 0, to = 0;
-	search_t st = BFS;
 
 	// parse the search arguments
-	while (search && (c = getopt(argc, argv, "f:t:bd")) != -1) {
+	while (search && (c = getopt(argc, argv, "f:t:")) != -1) {
 		switch (c) {
 			case 'f':	// from this vertex
 				from = atoi(optarg);
 				break;
 			case 't':	// to this vertex
 				to = atoi(optarg);
-				break;
-			case 'b':	// breadth-first
-				st = BFS;
-				break;
-			case 'd':	// depth-first
-				st = DFS;
 				break;
 			case '?':	// error parsing arg
 				exit(EXIT_FAILURE);
