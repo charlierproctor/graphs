@@ -26,7 +26,9 @@ bool Graph::isConnected(){
 
 		// push on all adjacent nodes
 		for (Node *adj : cursor->adj_nodes) {
-			s.push(adj);
+			if (!adj->visited) {
+				s.push(adj);
+			}
 		}
 	}
 
