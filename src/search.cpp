@@ -13,6 +13,7 @@ Node *Graph::bfs(Node *start, Node *find) {
 		
 		// pop off the front element
 		cursor = q.front();
+		cursor->visited = true;
 		q.pop();
 
 		/// we found the node we're looking for	
@@ -22,7 +23,9 @@ Node *Graph::bfs(Node *start, Node *find) {
 		
 		// push all adjacent nodes onto the queue
 		for (Node *adj : cursor->adj_nodes) {
-			q.push(adj);
+			if (!adj->visited) {
+				q.push(adj);
+			}
 		}
 	}
 
@@ -42,6 +45,7 @@ Node *Graph::dfs(Node *start, Node *find) {
 		
 		// pop off the top element
 		cursor = s.top();
+		cursor->visited = true;
 		s.pop();
 
 		/// we found the node we're looking for	
@@ -51,7 +55,9 @@ Node *Graph::dfs(Node *start, Node *find) {
 		
 		// push all adjacent nodes onto the queue
 		for (Node *adj : cursor->adj_nodes) {
-			s.push(adj);
+			if (!adj->visited) {
+				s.push(adj);
+			}
 		}
 	}
 
