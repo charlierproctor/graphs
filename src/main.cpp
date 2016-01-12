@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 	int num = 5, m = 5, children = 2; 
 	string graph = "complete"; 
 	graph_t type = UNDIRECTED;
-	string property;
+	vector<string> properties;
 	bool dot = false, search = false, read = false;
 
 	// parse the command-line arguments
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 				type = (!strcmp(optarg,"directed") ? DIRECTED : UNDIRECTED);
 				break;
 			case 'p':
-				property = string(optarg);
+				properties.push_back(string(optarg));
 				break;
 			case 'd':	// print dot representation
 				dot = true;
@@ -97,16 +97,19 @@ int main(int argc, char *argv[])
 
 	cerr << "numVertices: " << g->vertices.size() << ", numEdges: " << g->edges.size() << endl;
 
-	if (!property.empty()){
-		cerr << property << ": ";
-		if (property == "connected") {
-			cerr << boolalpha << g->isConnected() << endl;
-		} else if (property == "cycle") {
-			cerr << boolalpha << g->hasCycle() << endl;
-		} else if (property == "tree") {
-			cerr << boolalpha << g->isTree() << endl;
-		} else {
-			cerr << "invalid" << endl;
+	// evaluate the properties as appropriate
+	if (properties.size() > 0){
+		for (string property : properties) {
+			cerr << property << ": ";
+			if (property == "connected") {
+				cerr << boolalpha << g->isConnected() << endl;
+			} else if (property == "cycle") {
+				cerr << boolalpha << g->hasCycle() << endl;
+			} else if (property == "tree") {
+				cerr << boolalpha << g->isTree() << endl;
+			} else {
+				cerr << "invalid" << endl;
+			}
 		}
 	}
 
