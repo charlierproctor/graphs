@@ -12,7 +12,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 
-	// bin/graph generate [-n N] [-m M] [-t TYPE] [-c CHILDREN] 
+	// bin/graph generate graph [-n N] [-m M] [-t TYPE] [-c CHILDREN] 
 	if (argc >= 3 && !strcmp(argv[1],"generate")) {
 		
 		// declare the variables
@@ -75,6 +75,7 @@ int main(int argc, char *argv[])
 		g->dot();
 		delete g;
 
+	// bin/graph analyze [-p PROPERTY]*
 	} else if (argc >= 2 && !strcmp(argv[1],"analyze")) {
 		vector<string> properties;
 		Graph *g = new Graph(cin);
@@ -114,6 +115,7 @@ int main(int argc, char *argv[])
 		g->dot();
 		delete g;
 
+	// bin/graph search FROM TO [-t TYPE]
 	} else if (argc >= 4 && !strcmp(argv[1],"search")) {
 		Graph *g = new Graph(cin);
 
