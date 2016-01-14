@@ -7,100 +7,96 @@
 
 using namespace std;
 
+#define USAGE "USAGE: bin/graph [generate|analyze|search]"
+
 int main(int argc, char *argv[])
 {
-	// default arguments
-	int num = 5, m = 5, children = 2; 
-	string graph = "complete"; 
-	graph_t type = UNDIRECTED;
-	vector<string> properties;
-	bool dot = false, search = false, read = false;
-	search_t st;
 
-	// parse the command-line arguments
-	int c;
-	while (!search && (c = getopt(argc, argv, "g:r:n:m:t:c:p:S:d")) != -1) {
-		switch (c) {
-			case 'g':	// graph name
-				graph = string(optarg);
-				break;
-			case 'r':	// read graph from stdin / file
-				read = true;
-				graph = string(optarg);
-				break;
-			case 'n':	// size of the graph
-				num = atoi(optarg);
-				break;
-			case 'm':
-				m = atoi(optarg);
-				break;
-			case 't':	// graph type (directed, undirected)
-				type = (!strcmp(optarg,"directed") ? DIRECTED : UNDIRECTED);
-				break;
-			case 'p':
-				properties.push_back(string(optarg));
-				break;
-			case 'd':	// print dot representation
-				dot = true;
-				break;
-			case 'c':	// how many of the tree
-				children = atoi(optarg);
-				break;
-			case 'S':
-				search = true;
-				st = (!strcmp(optarg, "depth") ? DFS : BFS);
-				break;
-			case '?':	// error parsing arg
-				exit(EXIT_FAILURE);
-				break;
-		} 	
-	}
+	// bin/graph generate [-n N] [-m M] [-t TYPE] [-c CHILDREN] 
+	if (argc >= 3 && !strcmp(argv[1],"generate")) {
+		
+		// declare the variables
+		int n = 5,m = 5,children = 2;
+		graph_t type = UNDIRECTED;
+		string graph = string(argv[2]);
+		
+		int c;
 
-	Graph *g;
-
-	// create the graph from a file
-	if (read) {
-		ifstream file;
-
-		if (graph == "+") {
-			g = new Graph(cin);
-		} else if (file.open(graph, ios::in), file.is_open()) {
-			g = new Graph(file);
-		} else {
-			cerr << "Unable to open " << graph << endl;
-			exit (EXIT_FAILURE);
+		// parse the command line argument
+		while ((c = getopt(argc - 2, argv + 2, "n:m:t:c:")) != -1) {
+			switch (c) {
+				case 'n':		// size of the graph (n)
+					n = atoi(optarg);
+					break;
+				case 'm':		// size of the graph (m)
+					m = atoi(optarg);
+					break;
+				case 't':		// DIRECTED vs. UNDIRECTED
+					type = (!strcmp(optarg,"directed") ? DIRECTED : UNDIRECTED);
+					break;
+				case 'c':		// number of children of each node in a tree
+					children = atoi(optarg);
+					break;
+				case '?':		// invalid argument
+					exit(EXIT_FAILURE);
+					break;
+			}
 		}
 
-	// create a COMPLETE GRAPH
-	} else if (graph == "complete") {
-		g = new CompleteGraph(num, graph, type);
+		Graph *g;
 
-	// create a COMPLETE BIPARTITE GRAPH
-	} else if (graph == "bipartite") {
-		g = new CompleteBipartiteGraph(num, m, graph, type);
+		// create a COMPLETE GRAPH
+		if (graph == "complete") {
+			g = new CompleteGraph(n, graph, type);
 
-	// create a CYCLE GRAPH
-	} else if (graph == "cycle") {
-		g = new CycleGraph(num, graph, type);
-		
-	// create a PATH GRAPH
-	} else if (graph == "path") {
-		g = new PathGraph(num, graph, type);
+		// create a COMPLETE BIPARTITE GRAPH
+		} else if (graph == "bipartite") {
+			g = new CompleteBipartiteGraph(n, m, graph, type);
 
-	// create a TREE
-	} else if (graph == "tree") {
-		g = new FullCompleteTree(graph, children, num);
+		// create a CYCLE GRAPH
+		} else if (graph == "cycle") {
+			g = new CycleGraph(n, graph, type);
+			
+		// create a PATH GRAPH
+		} else if (graph == "path") {
+			g = new PathGraph(n, graph, type);
 
-	// invalid graph type
-	} else {
-		cerr << graph << ": invalid graph type" << endl;
-		exit(EXIT_FAILURE);
-	}
+		// create a TREE
+		} else if (graph == "tree") {
+			g = new FullCompleteTree(graph, children, n);
 
-	cerr << "numVertices: " << g->vertices.size() << ", numEdges: " << g->edges.size() << endl;
+		// invalid graph type
+		} else {
+			cerr << graph << ": invalid graph type" << endl;
+			exit(EXIT_FAILURE);
+		}
 
-	// evaluate the properties as appropriate
-	if (properties.size() > 0){
+		// print out and delete the generated graph
+		g->dot();
+		delete g;
+
+	} else if (argc >= 2 && !strcmp(argv[1],"analyze")) {
+		vector<string> properties;
+		Graph *g = new Graph(cin);
+
+		// display the number of vertices, edges.
+		cerr << "numVertices: " << g->vertices.size() << ", numEdges: " << g->edges.size() << endl;
+
+		int c;
+
+		// parse the command line arguments
+		while ((c = getopt(argc - 1, argv + 1, "p:")) != -1) {
+			switch (c) {
+				case 'p':
+					properties.push_back(string(optarg));
+					break;
+				case '?':
+					exit(EXIT_FAILURE);
+					break;
+			}
+		}
+
+		// evaluate the properties as appropriate
 		for (string property : properties) {
 			cerr << property << ": ";
 			if (property == "connected") {
@@ -113,32 +109,32 @@ int main(int argc, char *argv[])
 				cerr << "invalid" << endl;
 			}
 		}
-	}
 
-	// print the graph, as appropriate
-	if (dot) {
+		// print and delete the graph
 		g->dot();
-	}
+		delete g;
 
-	int from = 0, to = 0;
+	} else if (argc >= 4 && !strcmp(argv[1],"search")) {
+		Graph *g = new Graph(cin);
 
-	// parse the search arguments
-	while (search && (c = getopt(argc, argv, "f:t:")) != -1) {
-		switch (c) {
-			case 'f':	// from this vertex
-				from = atoi(optarg);
-				break;
-			case 't':	// to this vertex
-				to = atoi(optarg);
-				break;
-			case '?':	// error parsing arg
-				exit(EXIT_FAILURE);
-				break;
-		} 	
-	}
+		// to/from arguments, search type.
+		int from = atoi(argv[2]), to = atoi(argv[3]);
+		search_t st;
 
-	// process search option
-	if (search) {
+		int c;
+
+		// parse the search arguments
+		while ((c = getopt(argc - 3, argv + 3, "t:")) != -1) {
+			switch (c) {
+				case 't':	// search type
+					st = (!strcmp(optarg,"depth") ? DFS : BFS);
+					break;
+				case '?':	// error parsing arg
+					exit(EXIT_FAILURE);
+					break;
+			}
+		}
+
 		// perform the search
 		Node *res;
 		if (st == BFS) {
@@ -153,9 +149,13 @@ int main(int argc, char *argv[])
 		} else {
 			cerr << "not found" << endl;
 		}
-	}
 
-	delete g;
+		// print and delete the graph
+		g->dot();
+		delete g;
+	} else {
+		cerr << USAGE << endl;
+	}
 
 	return 0;
 }
