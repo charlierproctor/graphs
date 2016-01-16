@@ -66,16 +66,16 @@ On a Mac, try some of the following:
 
 ```bash
 # generates a ternary tree of height 3 and displays it using dot and preview.
-$ graph tree -n 3 -c 3 | dot -Tpng | open -a Preview.app -f
+$ graph generate tree -n 3 -c 3 | dot -Tpng | open -a Preview.app -f
 
 # generates the complete bipartite graph K (3,4)
-$ graph bipartite -n 3 -m 4 | dot -Tpng | open -a Preview.app -f
+$ graph generate bipartite -n 3 -m 4 | dot -Tpng | open -a Preview.app -f
 
 # test the properties of a tree
-$ graph tree -n 3 -c 3 | graph analyze -p connected -p cycle -p tree
+$ graph generate tree -n 3 -c 3 | graph analyze -p connected -p cycle -p tree
 
 # depth-first search from vertex 2 to 4 in a complete graph of size 5
-$ graph complete -n 5 | graph search 2 4 -t depth
+$ graph generate complete -n 5 | graph search 2 4 -t depth
 ```
 
 ## Structure
