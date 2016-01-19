@@ -10,6 +10,7 @@
 #include <regex>
 #include <stack>
 #include <queue>
+#include <algorithm>
 
 #ifndef GRAPH_H
 #define GRAPH_H
@@ -193,6 +194,15 @@ public:
 	 * @return boolean: whether the graph is a tree
 	 */
 	bool isTree();
+
+	/**
+	 * @brief is this graph isomophic to g
+	 *
+	 * @param g the graph to compare against
+	 *
+	 * @return true (isomorphic) or false.
+	 */
+	bool isomorphic(Graph *g);
 
 protected:
 	/**
