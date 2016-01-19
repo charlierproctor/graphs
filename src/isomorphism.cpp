@@ -30,8 +30,8 @@ bool equivalent(Graph *a, Graph *b) {
 
 		// looking for a matching edge in b's edges
 		for (Edge *edge_b : b->edges) {
-			if ((edge_a->from->label == edge_b->from->label)
-				&& (edge_a->to->label == edge_b->to->label)) {
+			if ((edge_a->from->temp_label == edge_b->from->temp_label)
+				&& (edge_a->to->temp_label == edge_b->to->temp_label)) {
 				matched = true;
 				break;
 			}
@@ -47,6 +47,10 @@ bool equivalent(Graph *a, Graph *b) {
 	return true;
 }
 
+bool compare(const Node *a, const Node *b) {
+	return a->temp_label < b->temp_label;
+}
+
 bool Graph::isomorphic(Graph *g) {
 
 	int numVertices = this->vertices.size();
@@ -54,17 +58,15 @@ bool Graph::isomorphic(Graph *g) {
 	// label all THIS graph's vertices consequetively
 	int label = 0;
 	for (auto elem: this->vertices) {
-		elem.second->label = label++;
+		elem.second->temp_label = label++;
 	}
 
 	// label all g's vertices consequetively
 	label = 0;
 	for (auto elem: g->vertices) {
-		elem.second->label = label++;
+		elem.second->temp_label = label++;
 	}
 
-	// NOTE: ignore the MAP of vertices from here.
-	
 	// create an array of g's vertices
 	Node **vertices = new Node *[numVertices];
 	int i = 0;
@@ -76,14 +78,14 @@ bool Graph::isomorphic(Graph *g) {
 	do {
 		// label this array permutation sequentially
 		for (label = 0; label < numVertices; label++) {
-			vertices[label]->label = label;
+			vertices[label]->temp_label = label;
 		}
 
 		// if we have a match... return true
 		if (equivalent(this,g)) {
 			return true;
 		}
-	} while (next_permutation(vertices, vertices + i));
+	} while (next_permutation(vertices, vertices + i, compare));
 
 	return false;
 

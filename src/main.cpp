@@ -176,7 +176,7 @@ int main(int argc, char *argv[])
 			b = new Graph(file_b);
 			file_b.close();
 		} else {
-			cerr << "Unable to open " << argv[2] << endl;
+			cerr << "Unable to open " << argv[3] << endl;
 			exit(EXIT_FAILURE);
 		}
 
