@@ -12,12 +12,18 @@ using namespace std;
  */
 bool equivalent(Graph *a, Graph *b) {
 	
+	graph_t type;
+
 	// different number of vertices
 	if (a->vertices.size() != b->vertices.size()) {
 		return false;
 	
 	// different number of edges
 	} else if (a->edges.size() != b->edges.size()) {
+		return false;
+
+	// different graph types
+	} else if ((type = a->type) != b->type) {
 		return false;
 	}
 	
@@ -34,6 +40,10 @@ bool equivalent(Graph *a, Graph *b) {
 				&& (edge_a->to->temp_label == edge_b->to->temp_label)) {
 				matched = true;
 				break;
+			} else if ((type == UNDIRECTED) && ((edge_a->to->temp_label == edge_b->from->temp_label)
+				&& (edge_a->from->temp_label == edge_b->to->temp_label))) {
+				matched = true;
+				break;
 			}
 		}
 		
@@ -48,7 +58,7 @@ bool equivalent(Graph *a, Graph *b) {
 }
 
 bool compare(const Node *a, const Node *b) {
-	return a->temp_label < b->temp_label;
+	return a->label < b->label;
 }
 
 bool Graph::isomorphic(Graph *g) {
@@ -73,6 +83,9 @@ bool Graph::isomorphic(Graph *g) {
 	for (auto elem : g->vertices) {
 		vertices[i++] = elem.second;
 	}
+
+	// sort before permutation!
+	sort(vertices, vertices + i, compare);
 
 	// permute the vertices
 	do {
