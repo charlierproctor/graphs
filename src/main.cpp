@@ -7,7 +7,7 @@
 
 using namespace std;
 
-#define USAGE "USAGE: bin/graph [generate|analyze|search]"
+#define USAGE "USAGE: bin/graph [generate|analyze|search|isomorphic]"
 
 int main(int argc, char *argv[])
 {
@@ -155,6 +155,35 @@ int main(int argc, char *argv[])
 		// print and delete the graph
 		g->dot();
 		delete g;
+	
+	// bin/graph isomorphic A B
+	} else if (argc >= 4 && !strcmp(argv[1], "isomorphic")) {
+	
+		ifstream file_a, file_b;
+		Graph *a, *b;
+
+		// load the first graph
+		if (file_a.open(argv[2]), file_a.is_open()) {
+			a = new Graph(file_a);
+			file_a.close();
+		} else {
+			cerr << "Unable to open " << argv[2] << endl;
+			exit(EXIT_FAILURE);
+		}
+		
+		// load the second graph
+		if (file_b.open(argv[3]), file_b.is_open()) {
+			b = new Graph(file_b);
+			file_b.close();
+		} else {
+			cerr << "Unable to open " << argv[2] << endl;
+			exit(EXIT_FAILURE);
+		}
+
+		// perform the test and print the results
+		cerr << "isomorphic: " << boolalpha << a->isomorphic(b) << endl;
+
+	// invalid usage
 	} else {
 		cerr << USAGE << endl;
 	}
