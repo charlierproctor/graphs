@@ -5,6 +5,8 @@ using namespace std;
 /**
  * @brief check to see whether two graphs have the same labeling AND edges
  *
+ * @details ASSUMES that both graphs are the same type, have the same number of vertices, and have the same number of edges.
+ *
  * @param a first graph
  * @param b second graph
  *
@@ -12,23 +14,9 @@ using namespace std;
  */
 bool equivalent(Graph *a, Graph *b) {
 	
-	graph_t type;
-
-	// different number of vertices
-	if (a->vertices.size() != b->vertices.size()) {
-		return false;
-	
-	// different number of edges
-	} else if (a->edges.size() != b->edges.size()) {
-		return false;
-
-	// different graph types
-	} else if ((type = a->type) != b->type) {
-		return false;
-	}
-	
-
+	graph_t type = a->type;
 	bool matched;
+	
 	// check all a edges
 	for (Edge *edge_a : a->edges) {
 		
@@ -36,10 +24,13 @@ bool equivalent(Graph *a, Graph *b) {
 
 		// looking for a matching edge in b's edges
 		for (Edge *edge_b : b->edges) {
+			// directed / undirected case
 			if ((edge_a->from->temp_label == edge_b->from->temp_label)
 				&& (edge_a->to->temp_label == edge_b->to->temp_label)) {
 				matched = true;
 				break;
+
+			// reverse undirected case
 			} else if ((type == UNDIRECTED) && ((edge_a->to->temp_label == edge_b->from->temp_label)
 				&& (edge_a->from->temp_label == edge_b->to->temp_label))) {
 				matched = true;
@@ -62,6 +53,19 @@ bool compare(const Node *a, const Node *b) {
 }
 
 bool Graph::isomorphic(Graph *g) {
+	
+	// different number of vertices
+	if (this->vertices.size() != g->vertices.size()) {
+		return false;
+	
+	// different number of edges
+	} else if (this->edges.size() != g->edges.size()) {
+		return false;
+
+	// different graph types
+	} else if (this->type != g->type) {
+		return false;
+	}
 
 	int numVertices = this->vertices.size();
 
