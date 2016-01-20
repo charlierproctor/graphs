@@ -12,7 +12,7 @@ using namespace std;
  *
  * @return boolean: true if both graphs have the SAME labeling AND edges
  */
-bool equivalent(Graph *a, Graph *b) {
+bool match(Graph *a, Graph *b) {
 	
 	bool matched;
 	
@@ -39,10 +39,6 @@ bool equivalent(Graph *a, Graph *b) {
 	return true;
 }
 
-bool compare(const Node *a, const Node *b) {
-	return a->index < b->index;
-}
-
 bool Graph::isomorphic(Graph *g) {
 	
 	// different number of vertices
@@ -59,19 +55,15 @@ bool Graph::isomorphic(Graph *g) {
 	}
 
 	int numVertices = this->vertices.size();
-
-	// index g's vertices (so we can permute them)
-	int i = 0;
-	for (auto elem: g->vertices) {
-		elem.second->index = i++;
-	}
-
+	
 	// create an array of g's vertices
 	Node **vertices = new Node *[numVertices];
 	int j = 0;
 	for (auto elem : g->vertices) {
 		vertices[j++] = elem.second;
 	}
+
+	// NOTE: we're going to mess with g's labels, to test for isomorphism. DO NOT trust them anymore.
 
 	// permute the vertices
 	do {
@@ -81,10 +73,10 @@ bool Graph::isomorphic(Graph *g) {
 		}
 
 		// if we have a match... return true
-		if (equivalent(this,g)) {
+		if (match(this,g)) {
 			return true;
 		}
-	} while (next_permutation(vertices, vertices + i, compare));
+	} while (next_permutation(vertices, vertices + numVertices));
 
 	return false;
 

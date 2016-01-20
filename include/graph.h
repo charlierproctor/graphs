@@ -39,11 +39,6 @@ public:
 	int label;
 
 	/**
-	 * @brief used for isomorphism tests
-	 */
-	int index;
-
-	/**
 	 * @brief height of the node, used in trees
 	 */
 	int height;
