@@ -41,7 +41,7 @@ public:
 	/**
 	 * @brief used for isomorphism tests
 	 */
-	int temp_label;
+	int index;
 
 	/**
 	 * @brief height of the node, used in trees

@@ -14,7 +14,6 @@ using namespace std;
  */
 bool equivalent(Graph *a, Graph *b) {
 	
-	graph_t type = a->type;
 	bool matched;
 	
 	// check all a edges
@@ -24,18 +23,10 @@ bool equivalent(Graph *a, Graph *b) {
 
 		// looking for a matching edge in b's edges
 		for (Edge *edge_b : b->edges) {
-			// directed / undirected case
-			if ((edge_a->from->temp_label == edge_b->from->temp_label)
-				&& (edge_a->to->temp_label == edge_b->to->temp_label)) {
+			if (*edge_a == *edge_b) {
 				matched = true;
 				break;
-
-			// reverse undirected case
-			} else if ((type == UNDIRECTED) && ((edge_a->to->temp_label == edge_b->from->temp_label)
-				&& (edge_a->from->temp_label == edge_b->to->temp_label))) {
-				matched = true;
-				break;
-			}
+			}	
 		}
 		
 		// no match -> return false.
@@ -49,7 +40,7 @@ bool equivalent(Graph *a, Graph *b) {
 }
 
 bool compare(const Node *a, const Node *b) {
-	return a->label < b->label;
+	return a->index < b->index;
 }
 
 bool Graph::isomorphic(Graph *g) {
@@ -69,33 +60,24 @@ bool Graph::isomorphic(Graph *g) {
 
 	int numVertices = this->vertices.size();
 
-	// label all THIS graph's vertices consequetively
-	int label = 0;
-	for (auto elem: this->vertices) {
-		elem.second->temp_label = label++;
-	}
-
-	// label all g's vertices consequetively
-	label = 0;
+	// index g's vertices (so we can permute them)
+	int i = 0;
 	for (auto elem: g->vertices) {
-		elem.second->temp_label = label++;
+		elem.second->index = i++;
 	}
 
 	// create an array of g's vertices
 	Node **vertices = new Node *[numVertices];
-	int i = 0;
+	int j = 0;
 	for (auto elem : g->vertices) {
-		vertices[i++] = elem.second;
+		vertices[j++] = elem.second;
 	}
-
-	// sort before permutation!
-	sort(vertices, vertices + i, compare);
 
 	// permute the vertices
 	do {
 		// label this array permutation sequentially
-		for (label = 0; label < numVertices; label++) {
-			vertices[label]->temp_label = label;
+		for (int label = 0; label < numVertices; label++) {
+			vertices[label]->label = label;
 		}
 
 		// if we have a match... return true
