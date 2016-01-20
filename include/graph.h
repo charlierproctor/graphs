@@ -80,12 +80,12 @@ public:
 	Node *to;	// starting node
 	graph_t type; 	// type of the connection
 	
-	bool operator== (const Edge& e);
-	bool operator!= (const Edge& e);
-	bool operator< (const Edge& e);
-	bool operator<= (const Edge& e);
-	bool operator> (const Edge& e);
-	bool operator>= (const Edge& e);
+	bool operator== (const Edge& e) const;
+	bool operator!= (const Edge& e) const;
+	bool operator< (const Edge& e) const;
+	bool operator<= (const Edge& e) const;
+	bool operator> (const Edge& e) const;
+	bool operator>= (const Edge& e) const;
 };
 
 // the two types of searches

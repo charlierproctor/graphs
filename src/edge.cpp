@@ -2,7 +2,8 @@
 
 using namespace std;
 
-bool Edge::operator== (const Edge& e) {
+bool Edge::operator== (const Edge& e) const {
+	
 	// must be the same type
 	return ((this->type == e.type) 
 		
@@ -15,19 +16,19 @@ bool Edge::operator== (const Edge& e) {
 				&& (this->from->label == e.to->label))));
 }
 
-bool Edge::operator!= (const Edge& e) {
+bool Edge::operator!= (const Edge& e) const {
 	return !this->operator==(e);
 }
 
-bool Edge::operator< (const Edge& e) {
+bool Edge::operator< (const Edge& e) const {
 	return (this->from->label < e.from->label);
 }
-bool Edge::operator<= (const Edge& e) {
+bool Edge::operator<= (const Edge& e) const {
 	return (this->from->label <= e.from->label);
 }
-bool Edge::operator> (const Edge& e) {
+bool Edge::operator> (const Edge& e) const {
 	return (this->from->label > e.from->label);
 }
-bool Edge::operator>= (const Edge& e) {
+bool Edge::operator>= (const Edge& e) const {
 	return (this->from->label >= e.from->label);
 }
