@@ -65,6 +65,9 @@ bool Graph::isomorphic(Graph *g) {
 
 	// NOTE: we're going to mess with g's labels, to test for isomorphism. DO NOT trust them anymore.
 
+	// sort the vertices before permutation!
+	sort(vertices, vertices + numVertices);
+
 	// permute the vertices
 	do {
 		// label this array permutation sequentially
