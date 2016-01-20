@@ -183,6 +183,10 @@ int main(int argc, char *argv[])
 		// perform the test and print the results
 		cerr << "isomorphic: " << boolalpha << a->isomorphic(b) << endl;
 
+		// delete the graphs
+		delete a;
+		delete b;
+
 	// invalid usage
 	} else {
 		cerr << USAGE << endl;
