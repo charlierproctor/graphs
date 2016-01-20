@@ -60,6 +60,17 @@ graph search FROM TO [-t <breadth|depth>]
 - `TO`: vertex to search for
 - `[-t <breadth|depth>]`: the type of search to perform
 
+### isomorphic
+
+Test whether two graphs are isomorphic.
+
+```
+graph isomorphic A B
+```
+
+- `A`: a file containing a dot representation of the first graph
+- `B`: a file containing a dot representation of the second graph
+
 ## Examples
 
 On a Mac, try some of the following:
@@ -76,6 +87,11 @@ $ graph generate tree -n 3 -c 3 | graph analyze -p connected -p cycle -p tree
 
 # depth-first search from vertex 2 to 4 in a complete graph of size 5
 $ graph generate complete -n 5 | graph search 2 4 -t depth
+
+# test whether two undirected bipartite graphs are isomorphic
+$ graph generate bipartite -n 3 -m 2 > a
+$ graph generate bipartite -n 2 -m 3 > b
+$ graph isomorphic a b
 ```
 
 ## Structure
