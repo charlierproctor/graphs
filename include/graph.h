@@ -74,10 +74,18 @@ public:
 /**
  * @brief an edge connects two nodes.
  */
-struct Edge {
+class Edge {
+public:
 	Node *from;	// ending node
 	Node *to;	// starting node
 	graph_t type; 	// type of the connection
+	
+	bool operator== (const Edge& e);
+	bool operator!= (const Edge& e);
+	bool operator< (const Edge& e);
+	bool operator<= (const Edge& e);
+	bool operator> (const Edge& e);
+	bool operator>= (const Edge& e);
 };
 
 // the two types of searches
